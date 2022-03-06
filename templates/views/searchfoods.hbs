@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{{title}}</title>
+        <link rel="icon" href="/img/food.png">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/styles.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        {{>header}}
+        
+        <div class="container m-5">
+            <form class="input-group" id="search-food-form">
+                <input type="text" name="search" placeholder="Search groceries" class="form-control">
+                <button id="search-food-btn" class="btn btn-outline-primary">Search</button>
+            </form>
+        </div>
+        
+        <div class="container" id="food-results"></div>
+
+        {{>footer}}
+        
+        <script src="/js/searchFoods/search-foods.js" type="module"></script>
+        <script src="/js/utils/util.js"></script>
+    </body>
+</html>

@@ -1,0 +1,14 @@
+ #search-food-form, #search-recipes-form, #meal-plan-form {
+    margin: auto; 
+    width: 50%;
+ }
+
+ #daily-intake {
+     margin-left: 50%;
+     margin-top: 5%;
+ }
+
+ .carousel-img {
+   max-width: 100%;
+   height: 800px;
+ }
