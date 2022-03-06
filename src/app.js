@@ -3,6 +3,9 @@ const express = require('express');
 const hbs = require('hbs');
 const app = express();
 
+// Get Environment variable port or a local port
+const port = process.env.PORT || 3000; 
+
 // set up handlebars
 app.set('view engine', 'hbs');
 // Views folder expected in root, set views to the location of templates folder
@@ -39,6 +42,6 @@ app.get('*', (req, res) => {
 });
 
 // port, callback called when server is up
-app.listen(3000, () => {
-    console.log('Server is up!');
+app.listen(port, () => {
+    console.log('Server is up on port ' + port);
 })
