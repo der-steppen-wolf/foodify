@@ -6,7 +6,7 @@ const app = express();
 // Get environment variable port or a local port
 const port = process.env.PORT || 3000; 
 
-// set up handlebars
+// Set up handlebars
 app.set('view engine', 'hbs');
 // Views folder expected in root, set views to the location of templates folder
 app.set('views', path.join(__dirname, '../templates/views'));
