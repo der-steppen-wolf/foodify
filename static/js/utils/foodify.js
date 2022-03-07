@@ -1,3 +1,8 @@
+/**
+ * Makes an asynchronous call to an API
+ * @param {string} url the url for the API call
+ * @returns {object}   the json returned by the API call
+ */
 const fetchJSON = async (url) => {
     var data = '';
     try {
@@ -9,6 +14,11 @@ const fetchJSON = async (url) => {
     return data;
 };
 
+/**
+ * Creates a fragment showing the results the API call returned
+ * @param {number} count number of results returned
+ * @returns {object}     a fragment containing the number of results returned
+ */
 const getResultsCountFragment = (count) => {
     const fragment = document.createDocumentFragment();
     const parser = new DOMParser();
@@ -18,10 +28,18 @@ const getResultsCountFragment = (count) => {
     const els = newNode.documentElement.querySelector('p');
 
     fragment.appendChild(els);
-
+    
     return fragment;
 };
 
+/**
+ * Creates a fragment that contains a bootstrap card with the API call information
+ * @param {function} template   a function that uses the json returned by the API call
+ *                              and returns the template of the card
+ * @param {object} foodJSON     a json object with the API call information
+ * @returns {object}            a fragment containing the card with the 
+ *                              food or recipe information
+ */
 const getCardFragment = (template, foodJSON) => {
     const fragment = document.createDocumentFragment();
     const parser = new DOMParser();
@@ -33,6 +51,13 @@ const getCardFragment = (template, foodJSON) => {
     return fragment;
 };
 
+/**
+ * Calculates the daily calorie intake based on age, sex and activity level
+ * @param {number} age 
+ * @param {string} sex 
+ * @param {string} activityLevel 
+ * @returns {number}             the daily calorie intake
+ */
 const getDailyCalorieIntake = (age, sex, activityLevel) => {
     var chart;
     if (sex == "female") {
@@ -87,48 +112,48 @@ const getDailyCalorieIntake = (age, sex, activityLevel) => {
     return chart.get(ageRange)[activityIndex];
 };
 
-const createDailyMealPlan = async (dailyIntake) => {
-    var totalCal = 0;
-    const mealTypes = ['breakfast', 'teatime', 'lunch', 'dinner', 'snack'];
-    const breakfastKeywords = ['egg', 'breakfast'];
-    const lunchDinnerKeywords = ['pasta', 'meat', 'fish', 'vegetables', 'greens'];
-    const snackKeywords = ['fruit', 'snack'];
+// const createDailyMealPlan = async (dailyIntake) => {
+//     var totalCal = 0;
+//     const mealTypes = ['breakfast', 'teatime', 'lunch', 'dinner', 'snack'];
+//     const breakfastKeywords = ['egg', 'breakfast'];
+//     const lunchDinnerKeywords = ['pasta', 'meat', 'fish', 'vegetables', 'greens'];
+//     const snackKeywords = ['fruit', 'snack'];
 
-    for (let i = 0; i < mealTypes.length && totalCal <= dailyIntake; i++) {
-        var keyword;
+//     for (let i = 0; i < mealTypes.length && totalCal <= dailyIntake; i++) {
+//         var keyword;
         
-        if (mealTypes[i] == 'breakfast') {
-            const random = Math.floor(Math.random() * breakfastKeywords.length);
-            keyword = breakfastKeywords[random];
-        } else if (mealTypes[i] == 'lunch' || mealTypes[i] == 'dinner') {
-            const random = Math.floor(Math.random() * lunchDinnerKeywords.length);
-            keyword = lunchDinnerKeywords[random];
-        }
-        else {
-            const random = Math.floor(Math.random() * snackKeywords.length);
-            keyword = snackKeywords[random];
-        }
+//         if (mealTypes[i] == 'breakfast') {
+//             const random = Math.floor(Math.random() * breakfastKeywords.length);
+//             keyword = breakfastKeywords[random];
+//         } else if (mealTypes[i] == 'lunch' || mealTypes[i] == 'dinner') {
+//             const random = Math.floor(Math.random() * lunchDinnerKeywords.length);
+//             keyword = lunchDinnerKeywords[random];
+//         }
+//         else {
+//             const random = Math.floor(Math.random() * snackKeywords.length);
+//             keyword = snackKeywords[random];
+//         }
 
-        var calories = 0;
-        while(true) {
-            await fetch('https://api.edamam.com/api/recipes/v2?type=public&q=' + keyword + 
-            '&app_id=9558fd4e&app_key=b1e4f9a0b4b37de5fc9a063df9653b13&mealType=' + mealTypes[i]).then((response) => {
-                response.json().then((data) => {
-                    const random = Math.floor(Math.random() * data.hits.length);
-                    calories = data.hits[random].recipe.calories;
-                    totalCal += calories;
-                });
-            });
+//         var calories = 0;
+//         while(true) {
+//             await fetch('https://api.edamam.com/api/recipes/v2?type=public&q=' + keyword + 
+//             '&app_id=9558fd4e&app_key=b1e4f9a0b4b37de5fc9a063df9653b13&mealType=' + mealTypes[i]).then((response) => {
+//                 response.json().then((data) => {
+//                     const random = Math.floor(Math.random() * data.hits.length);
+//                     calories = data.hits[random].recipe.calories;
+//                     totalCal += calories;
+//                 });
+//             });
 
-            if (totalCal > dailyIntake) {
-                totalCal -= calories;
-            }
-            else {
-                break;
-            }
-        }
-    }
-    console.log(totalCal)
-};
+//             if (totalCal > dailyIntake) {
+//                 totalCal -= calories;
+//             }
+//             else {
+//                 break;
+//             }
+//         }
+//     }
+//     console.log(totalCal)
+// };
 
-export {getDailyCalorieIntake, createDailyMealPlan, fetchJSON, getResultsCountFragment, getCardFragment};
+export {getDailyCalorieIntake, fetchJSON, getResultsCountFragment, getCardFragment};

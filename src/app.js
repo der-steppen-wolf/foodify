@@ -3,7 +3,7 @@ const express = require('express');
 const hbs = require('hbs');
 const app = express();
 
-// Get Environment variable port or a local port
+// Get environment variable port or a local port
 const port = process.env.PORT || 3000; 
 
 // set up handlebars
@@ -12,7 +12,7 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, '../templates/views'));
 hbs.registerPartials(path.join(__dirname, '../templates/partials'));
 
-// Serve static content for the app from the “static” directory in the application directory
+// Serve static content for the app from the “static” directory
 app.use(express.static(path.join(__dirname, '../static')));
 
 app.get('/', (req, res) => {
