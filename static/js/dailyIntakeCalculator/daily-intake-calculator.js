@@ -1,4 +1,4 @@
-import { getDailyCalorieIntake, createDailyMealPlan } from '../utils/foodify.js';
+import { getDailyCalorieIntake} from '../utils/foodify.js';
 
 const mealPlanForm = document.querySelector('#meal-plan-form');
 const results = document.querySelector('#results');
